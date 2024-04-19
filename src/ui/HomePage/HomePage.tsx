@@ -1,10 +1,12 @@
-import { Button } from "@mui/material";
+import ImageSearch from "../ImageSearch/ImageSearch";
+import ImageResults from "../ImageResults/ImageResults";
 
 function HomePage() {
   return (
-    <div>
-      HomePage <Button variant="contained">Hello</Button>
-    </div>
+    <>
+      <ImageSearch />
+      <ImageResults />
+    </>
   );
 }
 
