@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   FormControl,
+  Grid,
   InputLabel,
   MenuItem,
   Select,
@@ -43,52 +44,55 @@ function ImageSearch({ setImages }: ImageSearchProps) {
       setError("Failed to fetch images. Please try again later.");
     }
   };
-  return (
-    <>
-      <Box
-        component="form"
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        sx={{ p: 5 }}
-        gap={2}
-        onSubmit={handleSearch}
-      >
-        <Typography>Search Images:</Typography>
 
-        <TextField
-          id="search-image"
-          label="Topic"
-          value={searchString}
-          onChange={(e) => setSearchString(e.target.value)}
-        />
-        <TextField
-          id="displayed-text"
-          label="Text to be displayed"
-          value={imageText}
-          onChange={(e) => setImageText(e.target.value)}
-        />
-        <FormControl sx={{ minWidth: 280 }}>
-          <InputLabel id="text-positioning-label">Text position</InputLabel>
-          <Select
-            labelId="text-positioning-label"
-            id="text-positioning"
-            value={position}
-            label="Text position"
-            onChange={(e) => setPosition(Number(e.target.value))}
-          >
-            {positions.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <Button variant="contained" size="large" type="submit">
-          Search
-        </Button>
-      </Box>
-      {/* normally I would use snackbar or something */}
+  return (
+    <Box component="form" sx={{ p: 5 }} onSubmit={handleSearch}>
+      <Grid container spacing={2} justifyContent="center" alignItems="center">
+        <Grid item xs={12} textAlign="center">
+          <Typography>Search Images:</Typography>
+        </Grid>
+        <Grid item xs={12} md={3}>
+          <TextField
+            fullWidth
+            id="search-image"
+            label="Topic"
+            value={searchString}
+            onChange={(e) => setSearchString(e.target.value)}
+          />
+        </Grid>
+        <Grid item xs={12} md={3}>
+          <TextField
+            fullWidth
+            id="displayed-text"
+            label="Text to be displayed"
+            value={imageText}
+            onChange={(e) => setImageText(e.target.value)}
+          />
+        </Grid>
+        <Grid item xs={12} md={3}>
+          <FormControl fullWidth>
+            <InputLabel id="text-positioning-label">Text position</InputLabel>
+            <Select
+              labelId="text-positioning-label"
+              id="text-positioning"
+              value={position}
+              label="Text position"
+              onChange={(e) => setPosition(Number(e.target.value))}
+            >
+              {positions.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} md={1} display="flex" justifyContent="center">
+          <Button variant="contained" size="large" type="submit">
+            Search
+          </Button>
+        </Grid>
+      </Grid>
       {error && (
         <Typography
           color="error"
@@ -97,7 +101,7 @@ function ImageSearch({ setImages }: ImageSearchProps) {
           {error}
         </Typography>
       )}
-    </>
+    </Box>
   );
 }
 
