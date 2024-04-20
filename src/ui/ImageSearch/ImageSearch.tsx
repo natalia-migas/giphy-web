@@ -15,9 +15,15 @@ import { Image } from "../../domain/imageSearch";
 
 interface ImageSearchProps {
   setImages: React.Dispatch<React.SetStateAction<Image[]>>;
+  setImgText: React.Dispatch<React.SetStateAction<string>>;
+  setTextPosition: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function ImageSearch({ setImages }: ImageSearchProps) {
+function ImageSearch({
+  setImages,
+  setImgText,
+  setTextPosition,
+}: ImageSearchProps) {
   const [searchString, setSearchString] = useState<string>("");
   const [imageText, setImageText] = useState<string>("");
   const [position, setPosition] = useState<number>(1);
@@ -40,6 +46,8 @@ function ImageSearch({ setImages }: ImageSearchProps) {
           title: img.title,
         }))
       );
+      setImgText(imageText);
+      setTextPosition(position);
     } catch (error) {
       setError("Failed to fetch images. Please try again later.");
     }

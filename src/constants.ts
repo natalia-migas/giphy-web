@@ -1,0 +1,5 @@
+export const TEXT_POSITIONS = {
+  TOP_CENTER: 1,
+  BOTTOM_CENTER: 2,
+  BELOW_IMAGE: 3,
+};
