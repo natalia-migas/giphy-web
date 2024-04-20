@@ -15,11 +15,11 @@ interface ImageResultsProps {
 function ImageResults({ images, imgText, textPosition }: ImageResultsProps) {
   return (
     <Container
-      maxWidth="lg"
+      maxWidth="xl"
       sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
       <Typography variant="h5">Image Results</Typography>
-      <Grid container spacing={10}>
+      <Grid container>
         {images.map((img, index) => (
           <ImageContainer item xs={12} md={4} key={index}>
             <StyledImage src={img.url} alt={`${img.title}-${index}`} />
