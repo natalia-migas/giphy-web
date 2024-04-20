@@ -2,10 +2,6 @@ import { z } from "zod";
 
 const ImageDetailsSchema = z.object({
   url: z.string(),
-  //todo: needed?
-  width: z.string(),
-  height: z.string(),
-  size: z.string().optional(),
 });
 
 const ImagesSchema = z.object({
@@ -14,6 +10,7 @@ const ImagesSchema = z.object({
 
 const GiphyImageSchema = z.object({
   images: ImagesSchema,
+  title: z.string(),
 });
 
 export const ImageAPIResponseSchema = z.object({

@@ -1,15 +1,15 @@
 import ImageSearch from "../ImageSearch/ImageSearch";
 import ImageResults from "../ImageResults/ImageResults";
 import { useState } from "react";
+import { Image } from "../../domain/imageSearch";
 
 function HomePage() {
-  const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<Image[]>([]);
 
-  console.log("images", images);
   return (
     <>
       <ImageSearch setImages={setImages} />
-      <ImageResults />
+      <ImageResults images={images} />
     </>
   );
 }
