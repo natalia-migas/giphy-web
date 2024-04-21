@@ -9,7 +9,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useImageSearch } from "../../context/ImageSearchContext";
+import { useImageSearch } from "../../infra/context/ImageSearchContext";
 
 function ImageSearch() {
   const {

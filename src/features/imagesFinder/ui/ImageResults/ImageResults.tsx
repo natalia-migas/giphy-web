@@ -5,7 +5,7 @@ import {
   TextOverlay,
   Navigation,
 } from "./ImageResults.styled";
-import { useImageSearch } from "../../context/ImageSearchContext";
+import { useImageSearch } from "../../infra/context/ImageSearchContext";
 
 function ImageResults() {
   const {

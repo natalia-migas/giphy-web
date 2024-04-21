@@ -1,6 +1,6 @@
 import { render, fireEvent, screen } from "@testing-library/react";
 import ImageResults from "./ImageResults";
-import { ImageSearchContext } from "../../context/ImageSearchContext";
+import { ImageSearchContext } from "../../infra/context/ImageSearchContext";
 import { ReactNode } from "react";
 
 const mockSetCurrentPage = jest.fn();

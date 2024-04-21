@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
-import { imagesFinderService } from "../services/imagesFinderService";
-import { Image } from "../domain/image";
+import { imagesFinderService } from "../../services/imagesFinderService";
+import { Image } from "../../domain/image";
 
 const limit = 3;
 

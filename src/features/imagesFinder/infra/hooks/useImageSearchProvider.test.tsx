@@ -1,6 +1,6 @@
 import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import { useImageSearchProvider } from "./useImageSearchProvider";
-import * as imagesFinderServiceModule from "../services/imagesFinderService";
+import * as imagesFinderServiceModule from "../../services/imagesFinderService";
 
 jest.mock("../services/imagesFinderService", () => {
   return {
