@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { ImageSearchContextData } from "../../domain/ImagesSearch";
+import { ImageSearchContextData } from "./ImageSearchContextData";
 
 export const ImageSearchContext = createContext<
   ImageSearchContextData | undefined
