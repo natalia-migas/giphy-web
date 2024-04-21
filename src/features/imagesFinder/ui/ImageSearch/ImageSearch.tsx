@@ -10,8 +10,8 @@ import {
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { getImages } from "../../application/imagesApi";
-import { Image } from "../../domain/imageSearch";
+import { imagesFinderService } from "../../services/imagesFinderService";
+import { Image } from "../../domain/image";
 
 interface ImageSearchProps {
   setImages: React.Dispatch<React.SetStateAction<Image[]>>;
@@ -46,7 +46,7 @@ function ImageSearch({
   const fetchImages = async () => {
     setError("");
     try {
-      const fetchedImages = await getImages(
+      const fetchedImages = await imagesFinderService.getImages(
         searchString,
         currentPage * limit,
         limit

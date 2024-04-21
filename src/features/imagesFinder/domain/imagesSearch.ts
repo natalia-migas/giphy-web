@@ -7,8 +7,3 @@ export interface ImageSearchFields {
 export interface ImageSearchFn {
   onSearch: (args: ImageSearchFields) => void;
 }
-
-export interface Image {
-  url: string;
-  title: string;
-}

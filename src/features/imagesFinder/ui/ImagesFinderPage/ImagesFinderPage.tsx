@@ -1,9 +1,9 @@
 import ImageSearch from "../ImageSearch/ImageSearch";
 import ImageResults from "../ImageResults/ImageResults";
 import { useState } from "react";
-import { Image } from "../../domain/imageSearch";
+import { Image } from "../../domain/image";
 
-function HomePage() {
+function ImagesFinderPage() {
   const [images, setImages] = useState<Image[]>([]);
   const [imgText, setImgText] = useState<string>("");
   const [textPosition, setTextPosition] = useState<number>(1);
@@ -32,4 +32,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default ImagesFinderPage;

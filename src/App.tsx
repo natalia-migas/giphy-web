@@ -1,7 +1,7 @@
-import HomePage from "./ui/HomePage/HomePage";
+import ImagesFinderPage from "./features/imagesFinder/ui/ImagesFinderPage/ImagesFinderPage";
 
 function App() {
-  return <HomePage />;
+  return <ImagesFinderPage />;
 }
 
 export default App;

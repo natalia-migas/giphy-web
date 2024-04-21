@@ -1,6 +1,6 @@
 import { Grid, Typography } from "@mui/material";
 import styled from "styled-components";
-import { TEXT_POSITIONS } from "../../constants";
+import { TEXT_POSITIONS } from "../../../../constants";
 
 export const ImageContainer = styled(Grid)`
   display: flex;

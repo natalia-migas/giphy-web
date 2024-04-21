@@ -1,5 +1,5 @@
 import { Grid, Container, Button } from "@mui/material";
-import { Image } from "../../domain/imageSearch";
+import { Image } from "../../domain/image";
 import {
   ImageContainer,
   StyledImage,
