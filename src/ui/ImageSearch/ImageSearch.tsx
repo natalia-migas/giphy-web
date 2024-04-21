@@ -9,7 +9,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getImages } from "../../application/imagesApi";
 import { Image } from "../../domain/imageSearch";
 
@@ -17,17 +17,25 @@ interface ImageSearchProps {
   setImages: React.Dispatch<React.SetStateAction<Image[]>>;
   setImgText: React.Dispatch<React.SetStateAction<string>>;
   setTextPosition: React.Dispatch<React.SetStateAction<number>>;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  setTotalPages: React.Dispatch<React.SetStateAction<number>>;
+  currentPage: number;
 }
 
 function ImageSearch({
   setImages,
   setImgText,
   setTextPosition,
+  setCurrentPage,
+  setTotalPages,
+  currentPage,
 }: ImageSearchProps) {
   const [searchString, setSearchString] = useState<string>("");
   const [imageText, setImageText] = useState<string>("");
   const [position, setPosition] = useState<number>(1);
   const [error, setError] = useState<string>("");
+
+  const limit = 3;
 
   const positions = [
     { value: 1, label: "on top of image - center top" },
@@ -35,11 +43,14 @@ function ImageSearch({
     { value: 3, label: "below image - center" },
   ];
 
-  const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const fetchImages = async () => {
     setError("");
     try {
-      const fetchedImages = await getImages(searchString);
+      const fetchedImages = await getImages(
+        searchString,
+        currentPage * limit,
+        limit
+      );
       setImages(
         fetchedImages.data.map((img) => ({
           url: img.images.downsized_medium.url,
@@ -48,17 +59,32 @@ function ImageSearch({
       );
       setImgText(imageText);
       setTextPosition(position);
+      setTotalPages(Math.ceil(fetchedImages.pagination.total_count / limit));
     } catch (error) {
       setError("Failed to fetch images. Please try again later.");
     }
   };
 
+  const handleSearch = (event?: React.FormEvent<HTMLFormElement>) => {
+    if (event) {
+      event.preventDefault();
+    }
+    fetchImages();
+  };
+
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [searchString, setCurrentPage]);
+
+  useEffect(() => {
+    if (searchString) {
+      fetchImages();
+    }
+  }, [currentPage]);
+
   return (
     <Box component="form" sx={{ p: 5 }} onSubmit={handleSearch}>
       <Grid container spacing={2} justifyContent="center" alignItems="center">
-        <Grid item xs={12} textAlign="center">
-          <Typography>Search Images:</Typography>
-        </Grid>
         <Grid item xs={12} md={3}>
           <TextField
             fullWidth

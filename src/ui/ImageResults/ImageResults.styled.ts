@@ -37,3 +37,12 @@ export const TextOverlay = styled(Typography)<{ textPosition: number }>`
     }
   }}
 `;
+
+export const Navigation = styled(Grid)`
+  background: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  padding: 20px;
+`;
