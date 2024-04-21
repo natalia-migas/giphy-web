@@ -9,33 +9,19 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
-import { imagesFinderService } from "../../services/imagesFinderService";
-import { Image } from "../../domain/image";
+import { useImageSearch } from "../../context/ImageSearchContext";
 
-interface ImageSearchProps {
-  setImages: React.Dispatch<React.SetStateAction<Image[]>>;
-  setImgText: React.Dispatch<React.SetStateAction<string>>;
-  setTextPosition: React.Dispatch<React.SetStateAction<number>>;
-  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
-  setTotalPages: React.Dispatch<React.SetStateAction<number>>;
-  currentPage: number;
-}
-
-function ImageSearch({
-  setImages,
-  setImgText,
-  setTextPosition,
-  setCurrentPage,
-  setTotalPages,
-  currentPage,
-}: ImageSearchProps) {
-  const [searchString, setSearchString] = useState<string>("");
-  const [imageText, setImageText] = useState<string>("");
-  const [position, setPosition] = useState<number>(1);
-  const [error, setError] = useState<string>("");
-
-  const limit = 3;
+function ImageSearch() {
+  const {
+    setSearchString,
+    setImageText,
+    setTextPosition,
+    searchString,
+    imgText,
+    textPosition,
+    error,
+    setShouldTriggerSearch,
+  } = useImageSearch();
 
   const positions = [
     { value: 1, label: "on top of image - center top" },
@@ -43,44 +29,12 @@ function ImageSearch({
     { value: 3, label: "below image - center" },
   ];
 
-  const fetchImages = async () => {
-    setError("");
-    try {
-      const fetchedImages = await imagesFinderService.getImages(
-        searchString,
-        currentPage * limit,
-        limit
-      );
-      setImages(
-        fetchedImages.data.map((img) => ({
-          url: img.images.downsized_medium.url,
-          title: img.title,
-        }))
-      );
-      setImgText(imageText);
-      setTextPosition(position);
-      setTotalPages(Math.ceil(fetchedImages.pagination.total_count / limit));
-    } catch (error) {
-      setError("Failed to fetch images. Please try again later.");
-    }
-  };
-
   const handleSearch = (event?: React.FormEvent<HTMLFormElement>) => {
     if (event) {
       event.preventDefault();
     }
-    fetchImages();
+    setShouldTriggerSearch(true);
   };
-
-  useEffect(() => {
-    setCurrentPage(0);
-  }, [searchString, setCurrentPage]);
-
-  useEffect(() => {
-    if (searchString) {
-      fetchImages();
-    }
-  }, [currentPage]);
 
   return (
     <Box component="form" sx={{ p: 5 }} onSubmit={handleSearch}>
@@ -99,7 +53,7 @@ function ImageSearch({
             fullWidth
             id="displayed-text"
             label="Text to be displayed"
-            value={imageText}
+            value={imgText}
             onChange={(e) => setImageText(e.target.value)}
           />
         </Grid>
@@ -109,9 +63,9 @@ function ImageSearch({
             <Select
               labelId="text-positioning-label"
               id="text-positioning"
-              value={position}
+              value={textPosition}
               label="Text position"
-              onChange={(e) => setPosition(Number(e.target.value))}
+              onChange={(e) => setTextPosition(Number(e.target.value))}
             >
               {positions.map((option) => (
                 <MenuItem key={option.value} value={option.value}>

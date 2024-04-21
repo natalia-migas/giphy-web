@@ -1,38 +1,34 @@
 import { Grid, Container, Button } from "@mui/material";
-import { Image } from "../../domain/image";
 import {
   ImageContainer,
   StyledImage,
   TextOverlay,
   Navigation,
 } from "./ImageResults.styled";
+import { useImageSearch } from "../../context/ImageSearchContext";
 
-interface ImageResultsProps {
-  images: Image[];
-  imgText: string;
-  textPosition: number;
-  currentPage: number;
-  totalPages: number;
-  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
-}
+function ImageResults() {
+  const {
+    images,
+    imgText,
+    textPosition,
+    currentPage,
+    totalPages,
+    setCurrentPage,
+    setShouldTriggerSearch,
+  } = useImageSearch();
 
-function ImageResults({
-  images,
-  imgText,
-  textPosition,
-  currentPage,
-  totalPages,
-  setCurrentPage,
-}: ImageResultsProps) {
   const handleNext = () => {
     if (currentPage < totalPages - 1) {
       setCurrentPage(currentPage + 1);
+      setShouldTriggerSearch(true);
     }
   };
 
   const handlePrevious = () => {
     if (currentPage > 0) {
       setCurrentPage(currentPage - 1);
+      setShouldTriggerSearch(true);
     }
   };
 

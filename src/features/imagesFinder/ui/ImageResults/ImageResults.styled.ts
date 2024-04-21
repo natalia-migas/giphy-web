@@ -20,10 +20,10 @@ export const TextOverlay = styled(Typography)<{ textPosition: number }>`
   width: 100%;
   color: white;
   text-align: center;
-  font-weight: bold;
+  font-weight: bold !important;
   max-width: 350px;
   -webkit-text-stroke: 2px black;
-  font-family: Arial Black;
+  font-family: Arial Black !important;
   ${({ textPosition }) => {
     switch (textPosition) {
       case TEXT_POSITIONS.TOP_CENTER:
