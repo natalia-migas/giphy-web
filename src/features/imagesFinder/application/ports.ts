@@ -1,4 +1,4 @@
-import { ImagesResponse } from "../domain/imagesResponse";
+import { ImagesResponse } from "../domain/ImagesResponse";
 
 export interface ImagesFinderService {
   getImages: (

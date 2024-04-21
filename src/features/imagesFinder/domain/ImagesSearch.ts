@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { Image } from "./image";
+import { Image } from "./Image";
 
 export interface ImageSearchFields {
   searchString: string;

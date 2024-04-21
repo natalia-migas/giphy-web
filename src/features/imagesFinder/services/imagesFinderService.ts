@@ -1,6 +1,6 @@
 import { httpService } from "../../../services/httpService";
 import { ImagesFinderService } from "../application/ports";
-import { imageAPIResponseSchema } from "../domain/imagesResponse";
+import { imageAPIResponseSchema } from "../domain/ImagesResponse";
 
 export const imagesFinderService: ImagesFinderService = {
   getImages: async (
