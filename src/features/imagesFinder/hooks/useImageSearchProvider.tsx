@@ -15,6 +15,7 @@ export const useImageSearchProvider = () => {
   const [shouldTriggerSearch, setShouldTriggerSearch] = useState(false);
 
   const searchImages = useCallback(async () => {
+    //normally I would use snackbar and handle errors differently
     setError("");
     try {
       const fetchedImages = await imagesFinderService.getImages(
